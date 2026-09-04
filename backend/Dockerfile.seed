@@ -1,0 +1,17 @@
+FROM python:3.13-slim-bookworm
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
+
+WORKDIR /app
+
+COPY requirements/main.txt ./requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY ./src ./src
+COPY ./scripts ./scripts
+
+# `scripts/seed_portals.py` locates `src/` itself relative to its own file
+# path, so no PYTHONPATH is needed here. DATABASE_URL must be provided at
+# `docker run` time (e.g. pointing at the `db` service from docker-compose.yml).
+ENTRYPOINT ["python", "scripts/seed_portals.py"]

@@ -1,0 +1,27 @@
+# Виртуальные окружения
+.venv/
+env/
+venv/
+
+# Кэш Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Настройки IDE
+.vscode/
+.idea/
+
+# Файлы настроек
+.env
+
+# Лог-файлы
+*.log
+*.txt
+*.DS_STORE
+
+# Другие временные файлы
+*.tmp
+
+.claude/
+.pytest_cache/
