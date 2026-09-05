@@ -6,6 +6,9 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 WORKDIR /app
 
+COPY requirements/migrations.txt ./migrations_requirements.txt
+RUN pip install --no-cache-dir -r migrations_requirements.txt
+
 COPY requirements/main.txt ./requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
@@ -13,4 +16,4 @@ COPY ./src ./
 
 EXPOSE 8000
 
-CMD ["uvicorn", "main:create_app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["sh", "-c", "alembic upgrade head && uvicorn main:create_app --host 0.0.0.0 --port 8000"]
