@@ -8,12 +8,14 @@ import { defineConfig } from 'vite'
 const BACKEND_URL = process.env.VITE_API_TARGET || 'http://localhost:8000'
 
 export default defineConfig({
-  // Root-absolute asset paths (Vite's default, `base: '/'`) only resolve
-  // once the built `dist/` is served from a web server's actual root.
-  // Opening `dist/index.html` directly (double-click, `file://...`) or
-  // serving it from a subfolder then 404s on every `/assets/...` request -
-  // a relative base keeps the build working from any location.
-  base: './',
+  // Must be root-absolute (Vite's default). react-router's BrowserRouter
+  // means a reload can land on any deep path (e.g. /portals/5); with a
+  // relative base (`./`), the browser would resolve `./assets/x.js` against
+  // that current path instead of the site root, requesting a path nginx's
+  // SPA fallback can't serve as JS - "Expected a JavaScript module but
+  // server responded with text/html". A root-absolute base always resolves
+  // to the real asset regardless of which route triggered the reload.
+  base: '/',
   plugins: [react()],
   server: {
     proxy: {
