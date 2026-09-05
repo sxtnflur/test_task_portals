@@ -3,8 +3,8 @@ import { defineConfig } from 'vite'
 
 // The backend (src/backend) does not send CORS headers, so in dev we proxy
 // API calls through Vite's own origin instead: the browser talks to
-// http://localhost:5173/api/... and Vite forwards it to the real backend,
-// stripping the /api prefix. See frontend/README.md for the production case.
+// http://localhost:5173/api/v1/... and Vite forwards it to the real backend,
+// stripping the /api/v1 prefix. See frontend/README.md for the production case.
 const BACKEND_URL = process.env.VITE_API_TARGET || 'http://localhost:8000'
 
 export default defineConfig({
@@ -17,10 +17,10 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/api': {
+      '/api/v1': {
         target: BACKEND_URL,
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
+        rewrite: (path) => path.replace(/^\/api\/v1/, ''),
       },
     },
   },

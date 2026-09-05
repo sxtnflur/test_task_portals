@@ -36,7 +36,7 @@ alembic upgrade head
 ```bash
 docker build -f backend/Dockerfile.seed -t portal-seed backend
 
-docker run --rm portal-seed
+docker run --rm -e DATABASE_URL="postgresql+asyncpg://postgres:postgres@host.docker.internal:5432/portals" portal-seed
 ```
 
 `host.docker.internal` — способ достучаться с контейнера до `db`, слушающего порт хоста, без

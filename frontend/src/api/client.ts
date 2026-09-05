@@ -1,6 +1,6 @@
 import type { ApiEnvelope } from './types'
 
-const BASE_URL = '/api'
+const BASE_URL = '/api/v1'
 
 /**
  * Raised for both of the backend's error shapes:

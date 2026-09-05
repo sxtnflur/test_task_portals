@@ -21,11 +21,11 @@ with `VITE_API_TARGET`, e.g. `VITE_API_TARGET=http://localhost:9000 npm run dev`
 
 The backend sends no CORS headers, so the browser can't call it directly from a different
 origin (`localhost:5173` → `localhost:8000`). Rather than touch backend code, `vite.config.ts`
-proxies `/api/*` to the backend during `npm run dev`, stripping the `/api` prefix — the app
-only ever calls same-origin `/api/...` paths. **This proxy only exists in dev.** A production
+proxies `/api/v1/*` to the backend during `npm run dev`, stripping the `/api/v1` prefix — the app
+only ever calls same-origin `/api/v1/...` paths. **This proxy only exists in dev.** A production
 static build has nothing to proxy through; deploying it needs either a reverse proxy that
-serves the built frontend and forwards `/api` to the backend under one origin, or CORS enabled
-on the backend.
+serves the built frontend and forwards `/api/v1` to the backend under one origin (see
+`frontend/nginx.conf`, used by the Docker build), or CORS enabled on the backend.
 
 ## Known backend limitations this frontend works around
 
