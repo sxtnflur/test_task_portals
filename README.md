@@ -3,6 +3,18 @@
 FastAPI-приложение с DDD-слоями. По умолчанию запускается с асинхронным in-memory
 репозиторием и демонстрационным порталами.
 
+Domain - основа. Сущности, объекты, логика. Этот слойй не знаю ничего о других слоях.
+Application - тонкий сервис, описывает методы внешнего взаимодействия
+Infra - Имплементации, в данном случае репозиториев. Domain, Application не знают о них.
+Presentation - API. FastAPI и pydantic только здесь, другие слои о нем не знают.
+
+Entities: Portal, PortalChangeLog
+ValueObjects: PortalStability, Energy, ExpiresAt, Risk
+
+Все исключения наследуются от DomainError
+
+Логика рисков:
+
 ## Запуск через Docker
 
 ```bash

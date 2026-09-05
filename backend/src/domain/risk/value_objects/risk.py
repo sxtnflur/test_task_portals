@@ -7,7 +7,7 @@ from domain.portal.value_objects.energy import Energy
 from domain.portal.value_objects.expires_at import ExpiresAt
 from domain.portal.value_objects.stability import PortalStability
 from domain.risk.enums import RiskFactorEnum, RiskLevel
-from domain.risk.value_objects.risk_factor import RiskFactor
+from domain.risk.risk_factor import RiskFactor
 
 CRITICAL_EXPIRY_WINDOW = datetime.timedelta(seconds=30)
 MAX_RISK_VALUE = 10

@@ -3,7 +3,7 @@ from dataclasses import dataclass
 
 from domain.portal.enums import PortalActionEnum, PortalStatusEnum
 from domain.risk.enums import RiskLevel
-from domain.risk.value_objects.risk_factor import RiskFactor
+from domain.risk.risk_factor import RiskFactor
 from domain.change_logs.entity import PortalChangeLog
 
 
