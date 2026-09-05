@@ -178,7 +178,7 @@ class Portal(Entity):
         :return: Float between 0 and 10, where 0 - min risk and 10 - max risk
         """
         self.raise_if_closed()
-        self.__stability = PortalStability(min(self.__stability.value + 0.1, 10.0))
+        self.__stability = PortalStability(min(self.__stability.value + 0.5, 10.0))
         return self.__stability
 
     def add_observer(self):

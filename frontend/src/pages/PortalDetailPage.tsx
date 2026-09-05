@@ -218,7 +218,7 @@ export function PortalDetailPage() {
             disabled={isBusy || isClosed}
             onClick={() => runAction('stabilize', () => stabilizePortal(portal.id))}
           >
-            {pendingAction === 'stabilize' ? 'Стабилизация…' : 'Стабилизировать (+0.1)'}
+            {pendingAction === 'stabilize' ? 'Стабилизация…' : 'Стабилизировать (+0.5)'}
           </button>
           <button
             disabled={isBusy || isClosed}

@@ -37,16 +37,7 @@ docker compose up --build
 - Фронтенд — `http://localhost:5173`
 - API — `http://localhost:8000`, документация — `http://localhost:8000/docs`
 
-Перед первым запуском (и после добавления новых миграций) нужно применить схему БД. Порт
-`db` опубликован на хост, так что миграции можно накатить прямо с локальной машины:
-
-```bash
-pip install -r backend/requirements/migrations.txt
-$env:DATABASE_URL = "postgresql+asyncpg://postgres:postgres@localhost:5432/portals"
-alembic upgrade head
-```
-
-(для macOS/Linux — `export DATABASE_URL=...`)
+Таблицы базы данных создадутся автоматически
 
 ### Заполнение БД демо-данными
 
@@ -54,21 +45,18 @@ alembic upgrade head
 он не входит в `docker-compose.yml` (это разовая задача, а не постоянный сервис), поэтому
 запускается вручную:
 
+Windows/MacOS:
 ```bash
 docker build -f backend/Dockerfile.seed -t portal-seed backend
 
 docker run --rm -e DATABASE_URL="postgresql+asyncpg://postgres:postgres@host.docker.internal:5432/portals" portal-seed
 ```
 
-`host.docker.internal` — способ достучаться с контейнера до `db`, слушающего порт хоста, без
-подключения к сети docker-compose (Docker Desktop на Windows/macOS понимает это имя из коробки;
-на Linux без Docker Desktop нужно добавить `--add-host=host.docker.internal:host-gateway`).
-
-Скрипт поддерживает те же флаги, что и при локальном запуске:
-
+Linux:
 ```bash
-docker run --rm portal-seed --reset
-docker run --rm portal-seed --extra 20
+docker build -f backend/Dockerfile.seed -t portal-seed backend
+
+docker run --rm -e DATABASE_URL="postgresql+asyncpg://postgres:postgres@host.docker.internal:5432/portals" --add-host=host.docker.internal:host-gateway portal-seed
 ```
 
 ## Запуск без Docker

@@ -157,16 +157,16 @@ class TestCloseAndOpen:
 
 
 class TestStabilize:
-    def test_increases_stability_by_one_tenth(self, make_portal):
+    def test_increases_stability_by_one_half(self, make_portal):
         portal = make_portal(stability=2.0)
 
         result = portal.stabilize()
 
-        assert result == PortalStability(2.1)
-        assert portal.stability == PortalStability(2.1)
+        assert result == PortalStability(2.5)
+        assert portal.stability == PortalStability(2.5)
 
     def test_is_capped_at_ten(self, make_portal):
-        portal = make_portal(stability=9.95)
+        portal = make_portal(stability=9.75)
 
         result = portal.stabilize()
 

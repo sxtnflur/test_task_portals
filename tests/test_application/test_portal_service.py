@@ -234,8 +234,8 @@ class TestStabilize:
 
         result = await portal_service.stabilize(1)
 
-        assert result.portal.stability == pytest.approx(2.1)
-        assert portal_repository.saved[0].stability.value == pytest.approx(2.1)
+        assert result.portal.stability == pytest.approx(2.5)
+        assert portal_repository.saved[0].stability.value == pytest.approx(2.5)
         assert result.change_log.action == PortalChangeLogAction.stabilize
 
     async def test_raises_when_portal_is_missing(self, portal_service):
