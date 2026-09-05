@@ -1,6 +1,7 @@
 from typing import Annotated
 
 from config.settings import settings
+from db import session_factory
 from fastapi import Depends
 
 from application.portal.service import PortalService
@@ -14,9 +15,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 
 async def get_db_session():
-    engine = create_engine(settings.database_url)
-    factory = create_session_factory(engine)
-    async with session_scope(factory) as scope:
+    async with session_scope(session_factory) as scope:
         yield scope
 
 
